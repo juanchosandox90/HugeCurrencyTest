@@ -1,5 +1,6 @@
 package com.sandoval.hugecurrencytest.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
@@ -12,7 +13,10 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.sandoval.hugecurrencytest.CurrencyCalcApp;
 import com.sandoval.hugecurrencytest.R;
+import com.sandoval.hugecurrencytest.internal.di.components.AppComponent;
+import com.sandoval.hugecurrencytest.ui.currency.CurrencyCalculatorActivity;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView navigationView;
@@ -26,13 +30,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
-      //  markCurrentNavItem();
+        //For mark the icon with the view for future purposes
+        //  markCurrentNavItem();
     }
 
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        drawerLayout = (DrawerLayout)getLayoutInflater()
+        drawerLayout = (DrawerLayout) getLayoutInflater()
                 .inflate(R.layout.activity_base, null);
         FrameLayout contentView = (FrameLayout) drawerLayout.findViewById(R.id.activity_content);
         navigationView = (NavigationView) drawerLayout.findViewById(R.id.navigationView);
@@ -45,16 +50,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         toggle.syncState();
         getLayoutInflater().inflate(layoutResID, contentView, true);
         super.setContentView(drawerLayout);
-        // setupComponent(CurrencyCalcApp.getAppComponent());
+        setupComponent(CurrencyCalcApp.getAppComponent());
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawers();
-                }else{
+                } else {
                     drawerLayout.openDrawer(GravityCompat.START);
                 }
 
@@ -63,5 +68,26 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.currency_calc:
+                if(this instanceof CurrencyCalculatorActivity) break;
+                startActivity(new Intent(this, CurrencyCalculatorActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                break;
+            case R.id.exchange_rate:
+                break;
+            case R.id.currency_compare:
+                break;
+        }
+        item.setChecked(true);
+        drawerLayout.closeDrawers();
+        return true;
+    }
+
+    protected abstract void setupComponent(AppComponent appComponent);
 
 }

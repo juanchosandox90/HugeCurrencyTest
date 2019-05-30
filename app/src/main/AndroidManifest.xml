@@ -4,8 +4,11 @@
     package="com.sandoval.hugecurrencytest">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".CurrencyCalcApp"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:appComponentFactory="whateverstring"
         android:icon="@mipmap/ic_launcher"
