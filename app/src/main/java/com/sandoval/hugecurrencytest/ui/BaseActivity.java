@@ -17,6 +17,7 @@ import com.sandoval.hugecurrencytest.CurrencyCalcApp;
 import com.sandoval.hugecurrencytest.R;
 import com.sandoval.hugecurrencytest.internal.di.components.AppComponent;
 import com.sandoval.hugecurrencytest.ui.currency.CurrencyCalculatorActivity;
+import com.sandoval.hugecurrencytest.ui.currency.ExchangeRatesActivity;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private NavigationView navigationView;
@@ -30,8 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     @Override
     protected void onResume() {
         super.onResume();
-        //For mark the icon with the view for future purposes
-        //  markCurrentNavItem();
+        markCurrentNavItem();
     }
 
 
@@ -74,11 +74,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         switch (item.getItemId()) {
             case R.id.currency_calc:
-                if(this instanceof CurrencyCalculatorActivity) break;
+                if (this instanceof CurrencyCalculatorActivity) break;
                 startActivity(new Intent(this, CurrencyCalculatorActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 break;
             case R.id.exchange_rate:
+                if (this instanceof ExchangeRatesActivity) break;
+                startActivity(new Intent(this, ExchangeRatesActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 break;
             case R.id.currency_compare:
                 break;
@@ -86,6 +89,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         item.setChecked(true);
         drawerLayout.closeDrawers();
         return true;
+    }
+
+    private void markCurrentNavItem() {
+        for (int i = 0; i < navigationView.getMenu().size(); i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
+        if (this instanceof CurrencyCalculatorActivity) {
+            navigationView.getMenu().findItem(R.id.currency_calc).setChecked(true);
+        } else if (this instanceof ExchangeRatesActivity) {
+            navigationView.getMenu().findItem(R.id.exchange_rate).setChecked(true);
+        }
     }
 
     protected abstract void setupComponent(AppComponent appComponent);

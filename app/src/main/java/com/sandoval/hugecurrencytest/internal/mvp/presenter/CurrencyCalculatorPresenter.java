@@ -15,7 +15,7 @@ public class CurrencyCalculatorPresenter extends MVP.Presenter<CurrencyCalculato
 
     private CurrencyModel currencyModel;
     private List<Currency> currencies = new ArrayList<>();
-    private int posOfCurrency = 0;
+    private int posOfCurrency = 10;
     private DecimalFormat df = new DecimalFormat("#.00");
     private boolean fromUsd = true;
 
@@ -54,6 +54,11 @@ public class CurrencyCalculatorPresenter extends MVP.Presenter<CurrencyCalculato
         getView().changeCurrency(currencies.get(posOfCurrency).getCurrencyCode());
     }
 
+    /**
+     *
+     * @param money
+     * Need to doble check the convertion, i thinnk theres a bug with the calculation :'(
+     */
     public void convert(Double money) {
         if (currencies.isEmpty()) return;
         if (fromUsd) {
