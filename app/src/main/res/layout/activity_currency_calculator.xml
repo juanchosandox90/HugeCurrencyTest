@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/hrk" />
+                    android:text="@string/usd" />
 
                 <TextView
                     android:id="@+id/tv_covert_to_currency_code"
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/hrk" />
+                    android:text="@string/usd" />
 
             </LinearLayout>
 
