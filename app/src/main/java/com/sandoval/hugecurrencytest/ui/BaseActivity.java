@@ -17,6 +17,7 @@ import com.sandoval.hugecurrencytest.CurrencyCalcApp;
 import com.sandoval.hugecurrencytest.R;
 import com.sandoval.hugecurrencytest.internal.di.components.AppComponent;
 import com.sandoval.hugecurrencytest.ui.currency.CurrencyCalculatorActivity;
+import com.sandoval.hugecurrencytest.ui.currency.CurrencyStatsActivity;
 import com.sandoval.hugecurrencytest.ui.currency.ExchangeRatesActivity;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -84,6 +85,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                         .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 break;
             case R.id.currency_compare:
+                if (this instanceof CurrencyStatsActivity) break;
+                startActivity(new Intent(this, CurrencyStatsActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                 break;
         }
         item.setChecked(true);
@@ -99,6 +103,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             navigationView.getMenu().findItem(R.id.currency_calc).setChecked(true);
         } else if (this instanceof ExchangeRatesActivity) {
             navigationView.getMenu().findItem(R.id.exchange_rate).setChecked(true);
+        } else if (this instanceof CurrencyStatsActivity) {
+            navigationView.getMenu().findItem(R.id.currency_compare).setChecked(true);
         }
     }
 
