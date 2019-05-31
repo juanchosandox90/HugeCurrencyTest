@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">HugeCurrencyTest</string>
+    <string name="app_name">Huge Currency Test</string>
+    <string name="currency_calculator">Currency Calculator</string>
+    <string name="exchange_rates">Exchange rates</string>
+    <string name="currency_stats">Currency Stats</string>
+    <string name="selling_rate">Selling rate</string>
+    <string name="median_rate">Median rate</string>
+    <string name="buying_rate">Buying rate</string>
+    <string name="no_data_available">No data available</string>
+    <string name="exchange_rate_title">"Exchange rates for "</string>
+    <string name="exchange_rate_title_today">"Exchange rates for today "</string>
+    <string name="usd">USD</string>
 </resources>
