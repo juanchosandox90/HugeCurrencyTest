@@ -8,14 +8,14 @@
 
     <application
         android:name=".CurrencyCalcApp"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:appComponentFactory="whateverstring"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_huge_currency_test"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_huge_currency_test"
+        android:roundIcon="@mipmap/ic_huge_currency_test_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
         <activity
@@ -27,7 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.currency.ExchangeRatesActivity" />
+        <activity
+            android:name=".ui.currency.ExchangeRatesActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.currency.CurrencyStatsActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
